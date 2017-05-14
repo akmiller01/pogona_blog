@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    volumes:
+      - blogdata:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/src"
+    ports:
+      - "80:80"
+      - "8000:8000"
+    environment:
+      - VIRTUAL_HOST=blog.pogona.org,www.pogona.org,pogona.org
+    depends_on:
+      - db
+
+volumes:
+  blogdata:
+    external: true
