@@ -12,7 +12,7 @@ services:
       - ".:/src"
     ports:
       - "80:80"
-      - "8000:8000"
+      #- "8000:8000"
     environment:
       - VIRTUAL_HOST=blog.pogona.org,www.pogona.org,pogona.org
     depends_on:

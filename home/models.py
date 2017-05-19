@@ -9,6 +9,13 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 class HomePage(Page):
     body = RichTextField(blank=True)
+    parent_page_types = ['wagtailcore.Page']
+    
+    @classmethod
+    def can_create_at(cls, parent):
+        # You can only create one of these!
+        return super(HomePage, cls).can_create_at(parent) \
+            and not cls.objects.exists()
     
     content_panels = Page.content_panels + [
         FieldPanel('body',classname="full"),

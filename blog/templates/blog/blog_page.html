@@ -7,6 +7,7 @@
 {% block content %}
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }}</p>
+    <p>By <a href="mailto:{{ page.owner.email }}">{{ page.owner.get_full_name }}</a></p>
     
     
     {% with categories=page.categories.all %}

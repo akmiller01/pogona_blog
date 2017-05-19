@@ -16,6 +16,8 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
+    parent_page_types = ['home.HomePage']
+    subpage_types = ['blog.BlogPage']
     
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
@@ -34,6 +36,8 @@ class BlogPage(Page):
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
 
+    parent_page_types = ['blog.BlogIndexPage']
+    subpage_types = []
     
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -105,6 +109,8 @@ class BlogCategory(models.Model):
         
 class AboutPage(Page):
     body = RichTextField(blank=True)
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
     
     content_panels = Page.content_panels + [
         FieldPanel('body',classname="full"),
