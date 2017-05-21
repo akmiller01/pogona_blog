@@ -32,9 +32,11 @@
         </div>
     {% endif %}
 
-    <div class="intro">{{ page.intro }}</div>
-
-    {{ page.body|richtext }}
+    {% if page.body %}
+        <div class="body-content">
+            {% include "blog/includes/streamfield.html" with content=page.body %}
+        </div>
+    {% endif %}
 
     {% for item in page.gallery_images.all %}
         <div style="float: left; margin: 10px">
@@ -42,7 +44,5 @@
             <p>{{ item.caption }}</p>
         </div>
     {% endfor %}
-
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 
 {% endblock %}
