@@ -11,11 +11,10 @@
     {% endif %}
     <div class="media-body">
       <h4 class="media-heading">{{ post.title }}</h4>
-      <p><strong>{{ post.date }}</strong></p>
+      <p class="meta">{{ post.date }} / {{ post.owner.get_full_name }}</p>
       {% if post.search_description %}
         <p>{{ post.search_description }}</p>
       {% endif %}
-      <p>by {{ post.owner.get_full_name }}</p>
     </div>
   </div>
 </a>

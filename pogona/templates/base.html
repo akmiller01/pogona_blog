@@ -1,4 +1,4 @@
-{% load static wagtailuserbar wagtailcore_tags demo_tags %}
+{% load static wagtailuserbar wagtailcore_tags blog_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -24,6 +24,7 @@
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/pogona.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -38,23 +39,16 @@
             {% top_menu parent=site_root calling_page=self %}
         {% endblock %}
         <div class="main container">
+            {% include 'blog/includes/breadcrumbs.html' %}
 
-            <!--Breadcrumbs-->
-            {% if self.get_ancestors|length > 1 %}
-            <ul class="breadcrumb">
-            
-            {% for page in self.get_ancestors %}
-            {% if page.is_root == False %}
-            <li><a href="{% pageurl page %}">{{ page.title }}</a></li>
-            {% endif %}
-            {% endfor %}
-            
-            <li class="active">{{ self.title }}</li>
-            
-            </ul>
-            {% endif %}
-
-            {% block content %}{% endblock %}
+            <div class="row">
+                <div class="col-sm-8">
+                    {% block content %}{% endblock %}
+                </div>
+                <div class="col-sm-4">
+                    {% include 'blog/includes/side_panel.html' %}
+                </div>
+            </div>
             
             {% include 'blog/includes/prev_next.html' %}
 
@@ -62,6 +56,8 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/pogona.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

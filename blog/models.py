@@ -18,7 +18,6 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 
 class BlogIndexPage(Page):
-    intro = RichTextField(blank=True)
     parent_page_types = ['home.HomePage']
     subpage_types = ['blog.BlogPage']
     

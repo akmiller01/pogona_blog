@@ -3,12 +3,13 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from blog.models import BlogStreamBlock
 
 
 class HomePage(Page):
-    body = RichTextField(blank=True)
+    body = StreamField(BlogStreamBlock())
     parent_page_types = ['wagtailcore.Page']
     
     @classmethod
@@ -18,5 +19,5 @@ class HomePage(Page):
             and not cls.objects.exists()
     
     content_panels = Page.content_panels + [
-        FieldPanel('body',classname="full"),
+        StreamFieldPanel('body'),
     ]
