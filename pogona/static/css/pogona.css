@@ -124,7 +124,7 @@ a.list-group-item {
 }
 
 .carousel-caption{
-    background-color: transparentize($wagtail-color, 0.4);
+    background-color: transparent;
     padding-top: 0;
 }
 

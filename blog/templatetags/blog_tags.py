@@ -47,7 +47,7 @@ def top_menu(context, parent, calling_page=None):
 
 
 # Retrieves the children of the top menu items for the drop downs
-@register.inclusion_tag('demo/tags/top_menu_children.html', takes_context=True)
+@register.inclusion_tag('top_menu_children.html', takes_context=True)
 def top_menu_children(context, parent):
     menuitems_children = parent.get_children()
     menuitems_children = menuitems_children.live().in_menu()
@@ -61,18 +61,32 @@ def top_menu_children(context, parent):
 
 # Retrieves all live pages which are children of the calling page
 #for standard index listing
+# @register.inclusion_tag(
+#     'demo/tags/standard_index_listing.html',
+#     takes_context=True
+# )
+# def standard_index_listing(context, calling_page):
+#     pages = calling_page.get_children().live()
+#     return {
+#         'pages': pages,
+#         # required by the pageurl tag that we want to use within this template
+#         'request': context['request'],
+#     }
+
+
+
+# Latest post
 @register.inclusion_tag(
-    'demo/tags/standard_index_listing.html',
+    'blog_listing_homepage.html',
     takes_context=True
 )
-def standard_index_listing(context, calling_page):
-    pages = calling_page.get_children().live()
+def blog_listing_homepage(context,count=1):
+    blogs = BlogPage.objects.live().order_by('-date')
     return {
-        'pages': pages,
+        'blogs': blogs[:count],
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
-
 
 # # Person feed for home page
 # @register.inclusion_tag(
