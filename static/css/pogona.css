@@ -165,3 +165,18 @@ blockquote::before {
 .wagtail-icon-wagtail:before {
   content: "" !important;
 }
+.navbar{
+    background-color:slategrey;
+    border:none;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+    color:white;
+}
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{
+    color:grey;
+    background-color:transparent;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    background-color:darkgrey;
+}
