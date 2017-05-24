@@ -155,3 +155,13 @@ blockquote::before {
   font-family: FontAwesome;
   content: '\f10d'; /*quote left icon*/
 }
+
+.wagtail-icon-wagtail{
+    background: url(/static/img/logo.svg);
+    background-size:40px;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.wagtail-icon-wagtail:before {
+  content: "" !important;
+}
