@@ -5,10 +5,29 @@
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    {% for post in blogpages %}
+    {% if request.GET.tag|length %}
+        <h4>Showing posts tagged as "{{ request.GET.tag }}" <a href=" {% pageurl self %} ">Show all</a></h4>
+    {% endif %}
+    {% for post in blogs %}
         {% with post=post.specific %}
             {% include "blog/includes/blog_list_item.html" %}
         {% endwith %}
     {% endfor %}
+    
+    <nav>
+      <ul class="pager">
+        <li class="previous{% if not blogs.has_previous %} disabled{% endif %}">
+          <a href="{% if blogs.has_previous %}?page={{ blogs.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}{% else %}#{% endif %}">
+            <i class="glyphicon glyphicon-menu-left" aria-hidden="true"></i> Previous
+          </a>
+        </li>
+            <li>Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</li>
+        <li class="next{% if not blogs.has_next %} disabled{% endif %}">
+          <a href="{% if blogs.has_next %}?page={{ blogs.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}{% else %}#{% endif %}">
+            Next <i class="glyphicon glyphicon-menu-right" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
 {% endblock %}

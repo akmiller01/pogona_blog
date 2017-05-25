@@ -22,13 +22,15 @@
             </ul>
         {% endif %}
     {% endwith %}
-    {% if page.tags.all.count %}
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags.all %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-            {% endfor %}
-        </div>
+    {% if self.tags.all.count %}
+        <div class="pull-right">
+        {% for tag in self.tags.all %}
+          <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
+             class="btn btn-primary btn-xs">
+            <i class="glyphicon glyphicon-tag"></i> {{ tag }}
+          </a>
+        {% endfor %}
+      </div>
     {% endif %}
 
     {% if page.body %}
