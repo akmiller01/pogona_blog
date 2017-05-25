@@ -18,6 +18,9 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+# from django import forms
+# from django.forms import ModelForm
+# from django.shortcuts import render, redirect
 
 class BlogIndexPage(Page):
     parent_page_types = ['home.HomePage']
@@ -192,3 +195,24 @@ class AboutPage(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
     ]
+    
+# class BlogPageComment(Orderable):
+#     blog = ParentalKey(BlogPage,related_name='blog_comments')
+#     name = models.CharField(max_length=255,blank=True)
+#     created = models.DateTimeField(auto_now_add=True)
+#     comment = models.TextField()
+#     approved = models.BooleanField(default=False)
+#     
+#     panels = [
+#         FieldPanel('name'),
+#         FieldPanel('comment'),
+#         FieldPanel('approved')
+#     ]
+# 
+#     class Meta:
+#         abstract = True
+# 
+# class CommentForm(ModelForm):
+#     class Meta:
+#         model = BlogPageComment
+#         fields = ['name','comment']
