@@ -4,6 +4,7 @@ from django import forms
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList
 
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
@@ -18,13 +19,19 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-# from django import forms
-# from django.forms import ModelForm
-# from django.shortcuts import render, redirect
+from django import forms
+from django.forms import ModelForm
+from django.shortcuts import render, redirect
 
 class BlogIndexPage(Page):
     parent_page_types = ['home.HomePage']
     subpage_types = ['blog.BlogPage']
+    
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+    ]   
+
+    promote_panels = Page.promote_panels
     
     @property
     def blogs(self):
@@ -54,17 +61,10 @@ class BlogIndexPage(Page):
             blogs = paginator.page(1)
         except EmptyPage:
             blogs = paginator.page(paginator.num_pages)
-
-        # Update template context
+        
         context = super(BlogIndexPage, self).get_context(request)
         context['blogs'] = blogs
         return context
-        
-        content_panels = [
-            FieldPanel('title', classname="full title"),
-        ]   
-
-        promote_panels = Page.promote_panels
 
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey('BlogPage', related_name='tagged_items')
@@ -125,6 +125,13 @@ class BlogPage(Page):
     parent_page_types = ['blog.BlogIndexPage']
     subpage_types = []
     
+    @property
+    def comments(self):
+        # Get list of live blog pages that are descendants of this page
+        comments = self.blog_comments.filter(approved=True).order_by('created')
+
+        return comments
+    
     def main_image(self):
         gallery_item = self.gallery_images.first()
         if gallery_item:
@@ -150,10 +157,41 @@ class BlogPage(Page):
         ImageChooserPanel('feed_image'),
     ]
     
+    comment_panels = [InlinePanel('blog_comments', label="Comments")]
+    
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(comment_panels, heading='Comments'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
+    
     @property
     def blog_index(self):
         # Find closest ancestor which is a blog index
         return self.get_ancestors().type(BlogIndexPage).last()
+    
+    def serve(self, request):    
+
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+
+            if form.is_valid():
+                comment = form.save(commit=False)
+                if not comment.name:
+                    comment.name = "anonymous"
+                comment.page_id = self.id
+                comment.approved = False
+                comment.post_as_administrator = False
+                comment.save()
+                return redirect(self.url)
+        else:
+            form = CommentForm()
+
+        return render(request, self.template, {
+            'page': self,
+            'form': form,
+        })
 
     
 class BlogPageGalleryImage(Orderable):
@@ -196,23 +234,20 @@ class AboutPage(Page):
         StreamFieldPanel('body'),
     ]
     
-# class BlogPageComment(Orderable):
-#     blog = ParentalKey(BlogPage,related_name='blog_comments')
-#     name = models.CharField(max_length=255,blank=True)
-#     created = models.DateTimeField(auto_now_add=True)
-#     comment = models.TextField()
-#     approved = models.BooleanField(default=False)
-#     
-#     panels = [
-#         FieldPanel('name'),
-#         FieldPanel('comment'),
-#         FieldPanel('approved')
-#     ]
-# 
-#     class Meta:
-#         abstract = True
-# 
-# class CommentForm(ModelForm):
-#     class Meta:
-#         model = BlogPageComment
-#         fields = ['name','comment']
+class Comment(models.Model):
+    name = models.CharField(max_length=255,blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField()
+    approved = models.BooleanField(default=False)
+    post_as_administrator = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+class BlogPageComment(Orderable,Comment):
+    page = ParentalKey(BlogPage,related_name='blog_comments')
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = BlogPageComment
+        fields = ['name','comment']
