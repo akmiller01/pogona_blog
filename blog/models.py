@@ -23,6 +23,8 @@ from django import forms
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
 
+from django.utils import formats
+
 class BlogIndexPage(Page):
     parent_page_types = ['home.HomePage']
     subpage_types = ['blog.BlogPage']
@@ -132,6 +134,14 @@ class BlogPage(Page):
 
         return comments
     
+    @property
+    def comment_count(self):
+        # Get list of live blog pages that are descendants of this page
+        comments = self.blog_comments.filter(approved=True).count()
+
+        return comments
+    
+    @property
     def main_image(self):
         gallery_item = self.gallery_images.first()
         if gallery_item:
@@ -161,7 +171,7 @@ class BlogPage(Page):
     
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(promote_panels, heading='Promote'),
         ObjectList(comment_panels, heading='Comments'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
@@ -171,7 +181,7 @@ class BlogPage(Page):
         # Find closest ancestor which is a blog index
         return self.get_ancestors().type(BlogIndexPage).last()
     
-    def serve(self, request):    
+    def serve(self, request):
 
         if request.method == 'POST':
             form = CommentForm(request.POST)
@@ -191,6 +201,8 @@ class BlogPage(Page):
         return render(request, self.template, {
             'page': self,
             'form': form,
+            'comments':self.comments,
+            'comment_count':self.comment_count
         })
 
     
@@ -243,9 +255,20 @@ class Comment(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['approved','-created']
 
+@register_snippet
 class BlogPageComment(Orderable,Comment):
     page = ParentalKey(BlogPage,related_name='blog_comments')
+    
+    def __str__(self):
+        if self.approved:
+            return "Approved comment by "+self.name+" on "+formats.date_format(self.created,'F j, Y @ f a')
+        else:
+            return "Unapproved comment by "+self.name+" on "+formats.date_format(self.created,'F j, Y @ f a')
+        
+    class Meta:
+        ordering = ['approved','-created']
 
 class CommentForm(ModelForm):
     class Meta:

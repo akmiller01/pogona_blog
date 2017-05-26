@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.date }} / <a href="mailto:{{ page.owner.email }}">{{ page.owner.get_full_name }}</a> / 0 comments</p>
+    <p class="meta">{{ page.date }} / <a href="mailto:{{ page.owner.email }}">{{ page.owner.get_full_name }}</a> / {{comment_count}} comments</p>
     
     
     {% with categories=page.categories.all %}
@@ -59,7 +59,7 @@
     
     <h4>Comments</h4>
     <hr/>
-    {% for comment in page.comments %}
+    {% for comment in comments %}
     <p><b>On {{comment.created|date:'F j, Y @ f a'}}, {% if comment.post_as_administrator %}<img style="margin:0" src="{% static 'img/logo.svg' %}" alt="Pogona" width="15" />{% endif %}<span {% if comment.post_as_administrator %}style="color:#ff9955"{% endif %}>{{comment.name}}</span> said:</b></p>
     <p>{{comment.comment}}</p>
     {% endfor %}
