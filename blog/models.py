@@ -25,6 +25,8 @@ from django.shortcuts import render, redirect
 
 from django.utils import formats
 
+from ipware.ip import get_real_ip
+
 class BlogIndexPage(Page):
     parent_page_types = ['home.HomePage']
     subpage_types = ['blog.BlogPage']
@@ -53,6 +55,11 @@ class BlogIndexPage(Page):
         tag = request.GET.get('tag')
         if tag:
             blogs = blogs.filter(tags__name=tag)
+            
+        # Filter by category
+        category = request.GET.get('category')
+        if category:
+            blogs = blogs.filter(categories__name=category)
 
         # Pagination
         page = request.GET.get('page')
@@ -182,6 +189,8 @@ class BlogPage(Page):
         return self.get_ancestors().type(BlogIndexPage).last()
     
     def serve(self, request):
+        
+        context = super(BlogPage, self).get_context(request)
 
         if request.method == 'POST':
             form = CommentForm(request.POST)
@@ -193,17 +202,18 @@ class BlogPage(Page):
                 comment.page_id = self.id
                 comment.approved = False
                 comment.post_as_administrator = False
+                comment.ip_address = get_real_ip(request)
                 comment.save()
                 return redirect(self.url)
         else:
             form = CommentForm()
-
-        return render(request, self.template, {
-            'page': self,
-            'form': form,
-            'comments':self.comments,
-            'comment_count':self.comment_count
-        })
+        
+        context['page'] = self
+        context['form'] = form
+        context['comments'] = self.comments
+        context['comment_count'] = self.comment_count
+        
+        return render(request, self.template, context)
 
     
 class BlogPageGalleryImage(Orderable):
@@ -221,14 +231,9 @@ class BlogPageGalleryImage(Orderable):
 @register_snippet
 class BlogCategory(models.Model):
     name = models.CharField(max_length=255)
-    icon = models.ForeignKey(
-        'wagtailimages.Image', null=True, blank=True,
-        on_delete=models.SET_NULL, related_name='+'
-    )
 
     panels = [
         FieldPanel('name'),
-        ImageChooserPanel('icon'),
     ]
 
     def __str__(self):
@@ -247,11 +252,12 @@ class AboutPage(Page):
     ]
     
 class Comment(models.Model):
-    name = models.CharField(max_length=255,blank=True)
+    name = models.CharField(max_length=255,blank=True,help_text="(optional)")
     created = models.DateTimeField(auto_now_add=True)
     comment = models.TextField()
     approved = models.BooleanField(default=False)
     post_as_administrator = models.BooleanField(default=False)
+    ip_address = models.GenericIPAddressField(blank=True,null=True)
 
     class Meta:
         abstract = True
@@ -274,3 +280,8 @@ class CommentForm(ModelForm):
     class Meta:
         model = BlogPageComment
         fields = ['name','comment']
+        
+        widgets = {
+            'name':forms.TextInput(attrs={"class":"form-control"}),
+            'comment':forms.Textarea(attrs={"class":"form-control","rows":4}),
+        }

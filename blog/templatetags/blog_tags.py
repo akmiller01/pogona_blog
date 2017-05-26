@@ -3,7 +3,8 @@ from django import template
 from django.conf import settings
 
 # from blog.models import PersonPage, BlogPage, EventPage, Advert, Page
-from blog.models import BlogPage
+from blog.models import BlogPage, BlogIndexPage
+from django.db.models import Count
 
 register = template.Library()
 
@@ -84,6 +85,21 @@ def blog_listing_homepage(context,count=1):
     blogs = BlogPage.objects.live().order_by('-date')
     return {
         'blogs': blogs[:count],
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
+    }
+
+# Categories
+@register.inclusion_tag(
+    'blog_categories_homepage.html',
+    takes_context=True
+)
+def blog_categories_homepage(context):
+    categories = BlogPage.objects.live().values('categories__name').annotate(total=Count('categories')).order_by('total')
+    blog_index = BlogIndexPage.objects.live().first()
+    return {
+        'categories': categories,
+        'blog_index': blog_index,
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }

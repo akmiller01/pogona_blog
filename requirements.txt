@@ -11,3 +11,5 @@ html5lib==0.999999
 
 gunicorn
 gevent
+
+django-ipware

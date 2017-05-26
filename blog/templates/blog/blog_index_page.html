@@ -8,6 +8,9 @@
     {% if request.GET.tag|length %}
         <h4>Showing posts tagged as "{{ request.GET.tag }}" <a href=" {% pageurl self %} ">Show all</a></h4>
     {% endif %}
+    {% if request.GET.category|length %}
+        <h4>Showing posts categorized as "{{ request.GET.category }}" <a href=" {% pageurl self %} ">Show all</a></h4>
+    {% endif %}
     {% for post in blogs %}
         {% with post=post.specific %}
             {% include "blog/includes/blog_list_item.html" %}
