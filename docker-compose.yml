@@ -4,15 +4,25 @@ services:
     image: postgres
     volumes:
       - blogdata:/var/lib/postgresql/data
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./static:/static
+      - ./media:/media
+    depends_on:
+      - web
   web:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ".:/src"
-    ports:
-      - "80:80"
-      #- "8000:8000"
+    expose:
+      - "80"
     environment:
       - VIRTUAL_HOST=blog.pogona.org,www.pogona.org,pogona.org
     depends_on:

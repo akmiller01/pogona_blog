@@ -194,3 +194,7 @@ a {
   height: 51px; 
   visibility: hidden; 
 }
+
+body{
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+}

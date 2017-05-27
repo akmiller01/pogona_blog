@@ -16,6 +16,5 @@ RUN crontab /etc/cron.d/publish-scheduled-pages
 
 WORKDIR /src
 RUN pip install -r requirements.txt
-EXPOSE 80
 
 CMD service cron start && gunicorn -w 2 -k gevent -b 0.0.0.0:80 pogona.wsgi
