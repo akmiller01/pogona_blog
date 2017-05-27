@@ -180,3 +180,7 @@ blockquote::before {
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
     background-color:grey;
 }*/
+
+a {
+    color:#ff9955;
+}

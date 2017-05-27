@@ -165,8 +165,8 @@ blockquote::before {
 .wagtail-icon-wagtail:before {
   content: "" !important;
 }
-.navbar{
-    background-color:slategrey;
+/*.navbar{
+    background-color:darkgrey;
     border:none;
 }
 
@@ -174,9 +174,13 @@ blockquote::before {
     color:white;
 }
 .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{
-    color:grey;
+    color:slategrey;
     background-color:transparent;
 }
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
-    background-color:darkgrey;
+    background-color:grey;
+}*/
+
+a {
+    color:#ff9955;
 }

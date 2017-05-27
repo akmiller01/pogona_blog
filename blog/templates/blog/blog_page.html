@@ -25,7 +25,7 @@
         <div class="pull-right">
         {% for tag in self.tags.all %}
           <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
-             class="btn btn-primary btn-xs">
+             class="btn btn-xs">
             <i class="glyphicon glyphicon-tag"></i> {{ tag }}
           </a>
         {% endfor %}
