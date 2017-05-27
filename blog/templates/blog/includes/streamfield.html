@@ -23,6 +23,8 @@
             </blockquote>
         {% elif child.block_type == 'paragraph' %}
             {{ child.value|richtext }}
+        {% elif child.block_type == 'endnote' %}
+            <p id="anchor{{ child.value.number }}" class="target"><a href="#endnote{{ child.value.number }}"><sup>[{{ child.value.number }}]</sup></a></p>
         {% elif child.block_type == 'aligned_image' %}
             <div class="img-wrapper {{ child.value.alignment }}">
                 {% if child.value.alignment == "left" or child.value.alignment == "right" %}
@@ -41,6 +43,13 @@
             </div>
         {% else %}
             {{ child }}
+        {% endif %}
+    {% endfor %}
+    {% for child in content %}
+        {% if child.block_type == 'endnote' %}
+            <p class="endnote target" id="endnote{{ child.value.number }}">
+                <a href="#anchor{{ child.value.number }}">{{ child.value.number }}.</a> {{ child.value.citation }}
+            </p>
         {% endif %}
     {% endfor %}
 </div>

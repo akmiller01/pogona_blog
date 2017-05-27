@@ -103,12 +103,13 @@ a.list-group-item {
 
 .list-group-item-text {
         margin-top: 1%;
-        img {
-            float: left;
-            margin-right: 2%;
-            margin-bottom: 1%;
-        }
     }
+    
+.list-group-item-text img {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 1%;
+}
 
 /* Style pager */
 .col-sm-4.pages {
@@ -183,4 +184,13 @@ blockquote::before {
 
 a {
     color:#ff9955;
+}
+
+/*Target offset*/
+.target:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -51px; 
+  height: 51px; 
+  visibility: hidden; 
 }

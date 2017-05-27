@@ -85,6 +85,10 @@ class PullQuoteBlock(StructBlock):
     class Meta:
         icon = "openquote"
         
+class EndNoteBlock(StructBlock):
+    number = CharBlock()
+    citation = CharBlock()
+        
 class HTMLAlignmentChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
         ('normal', 'Normal'), ('full', 'Full width'),
@@ -113,6 +117,7 @@ class BlogStreamBlock(StreamBlock):
     h4 = CharBlock(icon="title", classname="title")
     intro = RichTextBlock(icon="pilcrow")
     paragraph = RichTextBlock(icon="pilcrow")
+    endnote = EndNoteBlock()
     aligned_image = ImageBlock(label="Aligned image", icon="image")
     pullquote = PullQuoteBlock()
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
