@@ -160,9 +160,21 @@ class BlogPage(Page):
             return gallery_item.image
         else:
             return None
+        
+    @property
+    def category_concat(self):
+        categories = self.categories.values_list('name', flat=True) 
+        return " ".join(categories)
+    
+    @property
+    def tag_concat(self):
+        tags = self.tags.values_list('name', flat=True) 
+        return " ".join(tags)
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
+        index.SearchField('category_concat'),
+        index.SearchField('tag_concat')
     ]
 
     content_panels = Page.content_panels + [

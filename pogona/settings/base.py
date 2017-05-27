@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'wagtail.contrib.postgres_search',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +148,10 @@ BASE_URL = 'http://pogona.org'
 
 #Disable password reset
 WAGTAIL_PASSWORD_RESET_ENABLED = False
+
+#Search backend
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+    },
+}

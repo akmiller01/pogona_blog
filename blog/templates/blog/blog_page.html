@@ -7,43 +7,49 @@
 {% block content %}
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }} / <a href="mailto:{{ page.owner.email }}">{{ page.owner.get_full_name }}</a> / {{comment_count}} comments</p>
-    
-    
-    {% with categories=page.categories.all %}
-        {% if categories %}
-            <h3>Posted in:</h3>
-            <ul>
-                {% for category in categories %}
-                    <li style="display: inline">
-                        <a href="{% pageurl self.blog_index %}?category={{category.name}}">{{ category.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    {% if self.tags.all.count %}
-        <div class="pull-right">
-        {% for tag in self.tags.all %}
-          <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
-             class="btn btn-xs">
-            <i class="glyphicon glyphicon-tag"></i> {{ tag }}
-          </a>
-        {% endfor %}
-      </div>
-    {% endif %}
 
     {% if page.body %}
         <div class="body-content">
             {% include "blog/includes/streamfield.html" with content=page.body %}
         </div>
     {% endif %}
-
+    <div class="row">
     {% for item in page.gallery_images.all %}
         <div style="float: left; margin: 10px">
             {% image item.image fill-320x240 %}
             <p>{{ item.caption }}</p>
         </div>
     {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+        {% with categories=page.categories.all %}
+            {% if categories %}
+                <b>Post categories:</b>
+                <ul class="list-unstyled">
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% pageurl self.blog_index %}?category={{category.name}}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </div>
+        <div class="col-sm-6">
+        {% if self.tags.all.count %}
+            <div class="pull-right">
+            {% for tag in self.tags.all %}
+              <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
+                 class="btn btn-xs">
+                <i class="glyphicon glyphicon-tag"></i> {{ tag }}
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+        </div>
+    </div
+    {% include 'blog/includes/prev_next.html' %}
     <div class="form-group row">
         <div class="col-sm-12">
             <hr/>
