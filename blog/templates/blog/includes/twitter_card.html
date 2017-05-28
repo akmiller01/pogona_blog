@@ -10,5 +10,5 @@
 {% endif %}
 {% if self.feed_image %}
 {% image self.feed_image fill-200x200 as img %}
-<meta name="twitter:image" content="{{ self.get_site.root_url }}{{ img.url }}" />
+<meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
 {% endif %}
