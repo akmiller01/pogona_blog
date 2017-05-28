@@ -9,6 +9,19 @@
 <meta name="twitter:description" content="{{ self.search_description }}" />
 {% endif %}
 {% if self.feed_image %}
-{% image self.feed_image fill-200x200 as img %}
-<meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+    {% image self.feed_image fill-200x200 as img %}
+    <meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+{% elif self.main_image %}
+    {% image self.main_image fill-200x200 as img %}
+    <meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+{% elif self.body %}
+    {% regroup self.body by block_type as children %}
+    {% for check in children %}
+        {% if check.grouper == "aligned_image" %}
+            {% with check.list|first as child %}
+                {% image child.value.image fill-200x200 as img %}
+                <meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
 {% endif %}
