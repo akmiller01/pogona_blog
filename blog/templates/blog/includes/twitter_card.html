@@ -1,0 +1,14 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@PogonaOrg" />
+{% if self.title %}
+<meta name="twitter:title" content="{{ self.title }}" />
+{% endif %}
+{% if self.search_description %}
+<meta name="twitter:description" content="{{ self.search_description }}" />
+{% endif %}
+{% if self.feed_image %}
+{% image self.feed_image fill-200x200 as img %}
+<meta name="twitter:image" content="{{ img.url }}" />
+{% endif %}
