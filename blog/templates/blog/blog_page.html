@@ -14,12 +14,17 @@
         </div>
     {% endif %}
     <div class="row">
-    {% for item in page.gallery_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
-        </div>
-    {% endfor %}
+        {% for item in page.gallery_images.all %}
+            <div class="img-wrapper left">
+            {% image item.image fill-320x240 as theimage%}
+            <img class="img-thumbnail" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+            {% if item.caption %}
+                <div class="caption">
+                    {{ item.caption }}
+                </div>
+            {% endif %}
+            </div>
+        {% endfor %}
     </div>
     <div class="row">
         <div class="col-sm-6">

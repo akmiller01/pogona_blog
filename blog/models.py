@@ -108,7 +108,7 @@ class ImageFormatChoiceBlock(FieldBlock):
 
 class ImageBlock(StructBlock):
     image = ImageChooserBlock()
-    caption = RichTextBlock()
+    caption = RichTextBlock(required=False)
     alignment = ImageFormatChoiceBlock()
 
 class BlogStreamBlock(StreamBlock):
