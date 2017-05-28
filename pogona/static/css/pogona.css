@@ -11,22 +11,22 @@
     margin-bottom: 1em;
 }
 
- img {
+img {
     margin-bottom: 2%;
     margin-top: 2%;
 }
 
-.body-content img.full-width {
+.img-wrapper.full-width {
     width: 100%;
 }
 
-.body-content img.left{
+.img-wrapper.left{
     width: 45%;
     margin-right: 5%;
     float: left;
 }
 
-.body-content img.right{
+.img-wrapper.right{
     width: 45%;
     margin-left: 5%;
     float: right;
@@ -48,16 +48,6 @@
     margin-bottom:0;
 }
 
-.img-wrapper.left {
-        float:left;
-        width: 45%;
-        margin-right: 5%;
-    }
-.imagewrapper.right {
-    float:right;
-    width: 45%;
-    margin-left: 5%;
-}
 
 .intro{
     font-size:1.4em;
