@@ -13,3 +13,5 @@ gunicorn
 gevent
 
 django-ipware
+
+Wand
