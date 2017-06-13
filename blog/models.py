@@ -87,7 +87,7 @@ class PullQuoteBlock(StructBlock):
         
 class EndNoteBlock(StructBlock):
     number = CharBlock()
-    citation = CharBlock()
+    citation = RichTextBlock(required=False)
         
 class HTMLAlignmentChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(

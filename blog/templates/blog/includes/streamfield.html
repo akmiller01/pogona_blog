@@ -24,9 +24,9 @@
         {% elif child.block_type == 'paragraph' %}
             {{ child.value|richtext }}
         {% elif child.block_type == 'endnote' %}
-            <p class="endnote target" id="endnote{{ child.value.number }}">
-                <b>{{ child.value.number }}.</b> {{ child.value.citation }}
-            </p>
+            <div class="endnote target" id="endnote{{ child.value.number }}">
+                <b>{{ child.value.number }}.&nbsp;</b> {{ child.value.citation }}
+            </div>
         {% elif child.block_type == 'aligned_image' %}
             <div class="img-wrapper {{ child.value.alignment }}">
                 {% if child.value.alignment == "left" or child.value.alignment == "right" %}

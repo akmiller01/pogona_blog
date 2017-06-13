@@ -201,3 +201,7 @@ a {
 body{
     font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
+
+.endnote b{
+    float:left;
+}
