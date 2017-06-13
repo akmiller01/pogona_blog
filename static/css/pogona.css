@@ -205,3 +205,9 @@ body{
 .endnote b{
     float:left;
 }
+
+.footer{
+    font-size:0.85em;
+    color:#777;
+    margin-bottom:20px;
+}
