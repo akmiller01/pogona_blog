@@ -71,11 +71,13 @@
         };
     </script>
     
+    {% if comments %}
     <h4>Comments</h4>
     <hr/>
     {% for comment in comments %}
     <p><b>On {{comment.created|date:'F j, Y @ f a'}}, {% if comment.post_as_administrator %}<img style="margin:0" src="{% static 'img/logo.svg' %}" alt="Pogona" width="15" />{% endif %}<span {% if comment.post_as_administrator %}style="color:#ff9955"{% endif %}>{{comment.name}}</span> said:</b></p>
     <p>{{comment.comment}}</p>
     {% endfor %}
+    {% endif %}
 
 {% endblock %}
