@@ -6,8 +6,10 @@ services:
       - blogdata:/var/lib/postgresql/data
   nginx:
     image: nginx:latest
-    ports:
-      - "80:80"
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=blog.pogona.org,www.pogona.org,pogona.org
     volumes:
       - ./:/src
       - ./config/nginx:/etc/nginx/conf.d
