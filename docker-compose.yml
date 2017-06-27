@@ -9,7 +9,7 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=blog.pogona.org,www.pogona.org,pogona.org
+      - VIRTUAL_HOST=www.pogona.org,pogona.org,www.pogonareport.com,pogonareport.com
     volumes:
       - ./:/src
       - ./config/nginx:/etc/nginx/conf.d
