@@ -5,7 +5,11 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
+    {% if page.header %}
         <h1 class="text-center home-header">{{page.header}}</h1>
+    {% endif %}
+    {% if page.motto %}
         <div class="text-center"><i class="home-motto">{{page.motto}}</i></div>
+    {% endif %}
         {% blog_listing_homepage 3 %}
 {% endblock %}
