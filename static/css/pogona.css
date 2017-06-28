@@ -185,6 +185,49 @@ blockquote::before {
     background-color:grey;
 }*/
 
+.navbar-inverse{
+    background-color:#ff9955;
+    border:none;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+    color:white;
+}
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{
+    color:lightgrey;
+    background-color:transparent;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    background-color:#cc6622;
+}
+
+.navbar-inverse .navbar-toggle {
+    border:none;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border:none;
+}
+
+.navbar-toggle {
+    background-color:transparent;
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color:#cc6622;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    background-color:#993300;
+}
+
+@media (max-width: 767px){
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+        color:white;
+    }
+}
+
+
 a {
     color:#ff9955;
 }
@@ -210,4 +253,12 @@ body{
     font-size:0.85em;
     color:#777;
     margin-bottom:20px;
+}
+
+.home-header{
+    font-size:48px;
+}
+
+.home-motto{
+    
 }

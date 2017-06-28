@@ -1,12 +1,12 @@
 {% load wagtailcore_tags %}
 {% if categories %}
   {% if blog_index %}
-    <ul class="list-group">
+    <ul class="dropdown-menu">
       {% for category in categories %}
         {% if category.total > 0 %}
-          <li class="list-group-item">
+          <li>
             <a href="{% pageurl blog_index %}?category={{category.categories__name}}">
-              {{category.categories__name}} <span class="badge pull-right">{{category.total}}</span>
+              {{category.categories__name}}<!-- <span class="badge pull-right">{{category.total}}</span>-->
             </a>
           </li>
         {% endif %}

@@ -2,7 +2,7 @@
 {% get_site_root as site_root %}
 
 {# Implementation of bootstrap theme dropdown menu - shows top level links and their children #}
-<div role="navigation" class="navbar navbar-default navbar-fixed-top">
+<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -15,7 +15,7 @@
             <a href="{% pageurl site_root %}" class="navbar-brand" title="{{ site_root.title }}" data-placement="bottom">
                 <!--<i class="glyphicon glyphicon-home"></i>-->
                 <!--Home-->
-                <img src="{% static 'img/logo.svg' %}" alt="Pogona" width="20" />
+                <img src="{% static 'img/pogona_white_square.svg' %}" alt="Pogona" width="20" />
             </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -30,6 +30,10 @@
                         {% endif %}
                     </li>       
                 {% endfor %}
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Categories <b class="caret"></b></a>
+                        {% blog_categories_homepage %}
+                    </li>
             </ul>
             <form class="navbar-form navbar-right" role="search" action="{% url 'search' %}" method="get">
                 <div class="input-group">

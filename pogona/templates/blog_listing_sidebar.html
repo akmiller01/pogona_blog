@@ -1,0 +1,11 @@
+{% if blogs %}
+  <div class="panel panel-default">
+    <div class="list-group">
+      {% for post in blogs %}
+        {% with post=post.specific %}
+            {% include "blog/includes/blog_sidepanel.html" %}
+        {% endwith %}
+    {% endfor %}
+    </div>
+  </div>
+{% endif %}

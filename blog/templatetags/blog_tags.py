@@ -78,10 +78,21 @@ def top_menu_children(context, parent):
 
 # Latest post
 @register.inclusion_tag(
+    'blog_listing_sidebar.html',
+    takes_context=True
+)
+def blog_listing_sidebar(context,count=3):
+    blogs = BlogPage.objects.live().order_by('-date')
+    return {
+        'blogs': blogs[:count],
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
+    }
+@register.inclusion_tag(
     'blog_listing_homepage.html',
     takes_context=True
 )
-def blog_listing_homepage(context,count=1):
+def blog_listing_homepage(context,count=3):
     blogs = BlogPage.objects.live().order_by('-date')
     return {
         'blogs': blogs[:count],

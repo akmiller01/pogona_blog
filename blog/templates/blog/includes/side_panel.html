@@ -1,11 +1,4 @@
 {% load wagtailcore_tags blog_tags %}
-
-<!--<div class="sidebar-module sidebar-module-inset">-->
-<div class="sidebar-module">
-    <h4 class='text-center'>Categories</h4>
-    <hr/>
-    {% blog_categories_homepage %}
-</div>
 <div class="sidebar-module">
     <h4 class='text-center'>Reach out</h4>
     <hr/>
@@ -15,10 +8,10 @@
         <td><a href="mailto:sarah@mail.pogona.org" target="_blank"><i class="fa fa-envelope" style="font-size:36px;"></i></a></td>
     </tr></table>
 </div>
-{% if self.content_type|stringformat:"s" != "blog index page" %}
+{% if self.content_type|stringformat:"s" != "blog index page" and self.content_type|stringformat:"s" != "home page" %}
 <div class="sidebar-module">
     <h4 class='text-center'>Latest posts</h4>
     <hr/>
-    {% blog_listing_homepage 3 %}
+    {% blog_listing_sidebar 3 %}
 </div>
 {% endif %}

@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags blog_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-        {% include "blog/includes/streamfield.html" with content=page.body %}
+        <h1 class="text-center home-header">{{page.header}}</h1>
+        <div class="text-center"><i class="home-motto">{{page.motto}}</i></div>
+        {% blog_listing_homepage 3 %}
 {% endblock %}
