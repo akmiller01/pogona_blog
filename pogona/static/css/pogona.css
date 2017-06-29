@@ -262,3 +262,11 @@ body{
 .home-motto{
     
 }
+
+.media-left{
+    width:33%;
+}
+
+.media-object{
+    width:100%;
+}
