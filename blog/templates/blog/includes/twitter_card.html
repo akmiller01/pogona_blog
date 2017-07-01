@@ -1,32 +1,40 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 <meta name="twitter:card" content="summary" />
+<meta property="og:type" content="article" />
 <meta name="twitter:site" content="@PogonaReport" />
 {% if self.title %}
     <meta name="twitter:title" content="{{ self.title }}" />
+    <meta property="og:title" content="{{ self.title }}" />
 {% else %}
-    <meta name="twitter:title" content="Pogona" />
+    <meta name="twitter:title" content="The Pogona Report" />
+    <meta property="og:title" content="The Pogona Report" />
 {% endif %}
 
 {% if self.search_description %}
     <meta name="twitter:description" content="{{ self.search_description }}" />
+    <meta property="og:description" content="{{ self.search_description }}" />
 {% else %}
-    <meta name="twitter:description" content="Something to read. From us, to you." />
+    <meta name="twitter:description" content="New ways of thinking about society, minus the politics" />
+    <meta property="og:description" content="New ways of thinking about society, minus the politics" />
 {% endif %}
 
 {% if self.feed_image %}
     {% image self.feed_image fill-200x200 as img %}
-    <meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+    <meta name="twitter:image" content="http://www.pogonareport.com{{ img.url }}" />
+    <meta property="og:image" content="http://www.pogonareport.com{{ img.url }}" />
 {% elif self.main_image %}
     {% image self.main_image fill-200x200 as img %}
-    <meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+    <meta name="twitter:image" content="http://www.pogonareport.com{{ img.url }}" />
+    <meta property="og:image" content="http://www.pogonareport.com{{ img.url }}" />
 {% elif self.body %}
     {% regroup self.body by block_type as children %}
     {% for check in children %}
         {% if check.grouper == "aligned_image" %}
             {% with check.list|first as child %}
                 {% image child.value.image fill-200x200 as img %}
-                <meta name="twitter:image" content="http://pogona.org{{ img.url }}" />
+                <meta name="twitter:image" content="http://www.pogonareport.com{{ img.url }}" />
+                <meta property="og:image" content="http://www.pogonareport.com{{ img.url }}" />
             {% endwith %}
         {% endif %}
     {% endfor %}
