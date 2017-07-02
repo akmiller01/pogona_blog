@@ -300,7 +300,6 @@ body.ready .stream-menu .toggle {
 }
 
 .stream-menu .toggle:before {
-  -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
   position: absolute;
@@ -311,7 +310,6 @@ body.ready .stream-menu .toggle {
 }
 
 .stream-menu .stream-menu-inner {
-  -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   max-width: 50em;
   margin: auto;
@@ -319,7 +317,6 @@ body.ready .stream-menu .toggle {
 }
 
 .stream-menu ul {
-  -webkit-transform: translate3d(0, 0, 0) scale(1);
   transform: translate3d(0, 0, 0) scale(1);
   visibility: visible;
   opacity: 1;
@@ -402,7 +399,6 @@ body.ready .stream-menu button {
 }
 
 .stream-menu.stream-menu-closed .stream-menu-inner ul {
-  -webkit-transform: scale(0.9);
   -ms-transform: scale(0.9);
   transform: scale(0.9);
   opacity: 0;
@@ -414,7 +410,6 @@ body.ready .stream-menu button {
 }
 
 .stream-menu.stream-menu-closed .toggle:before {
-  -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }

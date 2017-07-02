@@ -376,13 +376,10 @@
 }
 
 .wagtail-userbar-trigger {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
   width: 3.5em;
@@ -450,7 +447,6 @@
 
 .wagtail-userbar.is-active .wagtail-userbar-items:after {
   opacity: 1;
-  -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
   transition-delay: .3s;
@@ -498,7 +494,6 @@
   color: #aaa;
   display: block;
   text-decoration: none !important;
-  -webkit-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
   transition: none !important;
@@ -521,7 +516,6 @@
 .wagtail-userbar__item .wagtail-icon:before {
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   left: 14px;
@@ -552,7 +546,6 @@
 }
 
 .wagtail-userbar--top-left .wagtail-userbar-nav .wagtail-userbar__item {
-  -webkit-transform: translateY(-1em);
   -ms-transform: translateY(-1em);
   transform: translateY(-1em);
 }
@@ -561,7 +554,6 @@
   top: 2px;
   left: 1.45em;
   border-bottom-color: #333;
-  -webkit-transform: translateY(0.6em);
   -ms-transform: translateY(0.6em);
   transform: translateY(0.6em);
 }
@@ -626,7 +618,6 @@
 }
 
 .wagtail-userbar--top-right .wagtail-userbar-nav .wagtail-userbar__item {
-  -webkit-transform: translateY(-1em);
   -ms-transform: translateY(-1em);
   transform: translateY(-1em);
 }
@@ -635,7 +626,6 @@
   top: 2px;
   right: 1.45em;
   border-bottom-color: #333;
-  -webkit-transform: translateY(0.6em);
   -ms-transform: translateY(0.6em);
   transform: translateY(0.6em);
 }
@@ -700,7 +690,6 @@
 }
 
 .wagtail-userbar--bottom-left .wagtail-userbar-nav .wagtail-userbar__item {
-  -webkit-transform: translateY(1em);
   -ms-transform: translateY(1em);
   transform: translateY(1em);
 }
@@ -709,7 +698,6 @@
   bottom: 2px;
   left: 1.45em;
   border-top-color: #333;
-  -webkit-transform: translateY(-0.6em);
   -ms-transform: translateY(-0.6em);
   transform: translateY(-0.6em);
 }
@@ -774,7 +762,6 @@
 }
 
 .wagtail-userbar--bottom-right .wagtail-userbar-nav .wagtail-userbar__item {
-  -webkit-transform: translateY(1em);
   -ms-transform: translateY(1em);
   transform: translateY(1em);
 }
@@ -783,7 +770,6 @@
   bottom: 2px;
   right: 1.45em;
   border-top-color: #333;
-  -webkit-transform: translateY(-0.6em);
   -ms-transform: translateY(-0.6em);
   transform: translateY(-0.6em);
 }
@@ -837,7 +823,6 @@
 }
 
 .wagtail-userbar.is-active .wagtail-userbar__item {
-  -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
   opacity: 1;
