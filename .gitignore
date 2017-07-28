@@ -3,3 +3,5 @@ secret_key.txt
 media/*
 static/CACHE/*
 ssl/*
+etc/*
+log/*
