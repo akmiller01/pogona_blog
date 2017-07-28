@@ -8,11 +8,13 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+      - "443:443"
     environment:
       - VIRTUAL_HOST=www.pogona.org,pogona.org,www.pogonareport.com,pogonareport.com
     volumes:
       - ./:/src
       - ./config/nginx:/etc/nginx/conf.d
+      - ./ssl:/etc/ssl/
       - ./static:/static
       - ./media:/media
     depends_on:
