@@ -14,8 +14,7 @@ services:
     volumes:
       - ./:/src
       - ./config/nginx:/etc/nginx/conf.d
-      # - ./ssl:/etc/ssl/
-      - ./etc/live/www.pogonareport.com:/etc/ssl/
+      - ./ssl:/etc/ssl/
       - ./static:/static
       - ./media:/media
     depends_on:
