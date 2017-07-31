@@ -6,7 +6,11 @@ DEBUG = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ALLOWED_HOSTS = [".pogona.org","localhost","web"]
+ALLOWED_HOSTS = [".pogonareport.com","localhost","web"]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SECURE_SSL_REDIRECT = True
 
 with open('/src/secret_key.txt') as f:
     SECRET_KEY = f.read().strip()

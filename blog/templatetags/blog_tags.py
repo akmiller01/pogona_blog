@@ -21,6 +21,13 @@ def get_site_root(context):
     # so object-comparison to self will return false as objects would differ
     return context['request'].site.root_page
 
+@register.assignment_tag(takes_context=True)
+def is_secure(context):
+    return context['request'].is_secure()
+
+@register.assignment_tag(takes_context=True)
+def get_absolute_uri(context):
+    return context['request'].build_absolute_uri()
 
 def has_menu_children(page):
     return page.get_children().live().in_menu().exists()

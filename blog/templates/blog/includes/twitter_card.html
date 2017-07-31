@@ -21,14 +21,14 @@
 
 {% if self.feed_image %}
     {% image self.feed_image fill-200x200 as img %}
-    <meta name="twitter:image" content="http://www.pogonareport.com{{ img.url }}" />
-    <meta property="og:image" content="http://www.pogonareport.com{{ img.url }}" />
+    <meta name="twitter:image" content="https://www.pogonareport.com{{ img.url }}" />
+    <meta property="og:image" content="https://www.pogonareport.com{{ img.url }}" />
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="200" />
 {% elif self.main_image %}
     {% image self.main_image fill-200x200 as img %}
-    <meta name="twitter:image" content="http://www.pogonareport.com{{ img.url }}" />
-    <meta property="og:image" content="http://www.pogonareport.com{{ img.url }}" />
+    <meta name="twitter:image" content="https://www.pogonareport.com{{ img.url }}" />
+    <meta property="og:image" content="https://www.pogonareport.com{{ img.url }}" />
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="200" />
 {% elif self.body %}
@@ -37,8 +37,8 @@
         {% if check.grouper == "aligned_image" %}
             {% with check.list|first as child %}
                 {% image child.value.image fill-200x200 as img %}
-                <meta name="twitter:image" content="http://www.pogonareport.com{{ img.url }}" />
-                <meta property="og:image" content="http://www.pogonareport.com{{ img.url }}" />
+                <meta name="twitter:image" content="https://www.pogonareport.com{{ img.url }}" />
+                <meta property="og:image" content="https://www.pogonareport.com{{ img.url }}" />
                 <meta property="og:image:width" content="200" />
                 <meta property="og:image:height" content="200" />
             {% endwith %}
