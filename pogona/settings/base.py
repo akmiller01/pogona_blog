@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'wagtail.contrib.postgres_search',
+
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
