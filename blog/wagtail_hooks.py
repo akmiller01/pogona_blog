@@ -3,6 +3,8 @@ from django.utils.html import format_html, format_html_join
 from django.conf import settings
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailcore.whitelist import attribute_rule, check_url, allow_without_attributes
+from wagtail.wagtailadmin.rich_text import HalloPlugin
+from django.conf.urls.static import static
 #  
 # def whitelister_element_rules():
 #     return {
@@ -11,6 +13,24 @@ from wagtail.wagtailcore.whitelist import attribute_rule, check_url, allow_witho
 #     }
 # hooks.register('construct_whitelister_element_rules', whitelister_element_rules)
  
+def register_custom_buttons(features):
+    features.register_editor_plugin(
+        'hallo', 'superscriptformat',
+        HalloPlugin(
+            name='superscriptformat',
+            js=[static('js/hallo-custombuttons.js')],
+        )
+    )
+    features.default_features.append('superscriptformat')
+    features.register_editor_plugin(
+        'hallo', 'endnoteanchorbutton',
+        HalloPlugin(
+            name='endnoteanchorbutton',
+            js=[static('js/hallo-custombuttons.js')],
+        )
+    )
+    features.default_features.append('endnoteanchorbutton')
+hooks.register('register_rich_text_feature',register_custom_buttons)
 def editor_js():
     js_files = [
         'js/hallo-custombuttons.js',

@@ -375,6 +375,12 @@
   height: auto;
 }
 
+@media print {
+  .wagtail-userbar {
+    display: none;
+  }
+}
+
 .wagtail-userbar-trigger {
   display: -ms-flexbox;
   display: flex;
